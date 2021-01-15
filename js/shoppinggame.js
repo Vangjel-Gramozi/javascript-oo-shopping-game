@@ -1,5 +1,4 @@
 let gameComplete = false;
-const MILISECONDS_TO_DAYS = 1.15740741 * 10**(-8);
 // Define the three constants here
 const name = "unknown";
 const score = 0;
@@ -30,7 +29,7 @@ function Product (id, name, price, expiryDate){
 
 // Complete the dateDiff function
 const dateDiff = (date1, date2) => {
-    return Math.round(Math.abs(date1 - date2) * MILISECONDS_TO_DAYS)
+    return Math.round(Math.abs(date1 - date2) * 1.15740741 * 10**(-8));
 };
 
 // Here, use Object.defineProperty to create property - daysToExpire
