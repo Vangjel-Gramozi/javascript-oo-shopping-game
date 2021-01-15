@@ -29,12 +29,14 @@ function Product (id, name, price, expiryDate){
 
 // Complete the dateDiff function
 const dateDiff = (date1, date2) => {
-    return Math.round(Math.abs(date1 - date2) * 1.15740741 * 10**(-8));
+    const differenceInMilliseconds = Math.abs(date2-date1);
+    differenceInDays = Math.ceil(differenceInMilliseconds/(1000*60*60*24));
+    return differenceInDays;
 };
 
 // Here, use Object.defineProperty to create property - daysToExpire
 Object.defineProperty(Product.prototype, 'daysToExpire', {
-    get() {
+    get: function() {
         return dateDiff(this.expiryDate, new Date());
     }
 });
@@ -84,7 +86,7 @@ const loadProducts = (map, prodId) => {
                 const value = item[1];
 
                 // Create and assign an instance of Product to prodObj here
-                let prodObj = new Product(id, name, price, expiryDate);
+                let prodObj = new Product();
 
                 if (prodObj != undefined && prodObj != null) {
                     for (let i = 0; i < prodKeys.length; i++) {
@@ -128,7 +130,7 @@ const loadMagicProducts = (map, prodId) => {
                 const value = item[1];
 
                 // Create and assign an instance of MagicProduct to prodObj here
-                let magProdObj = new MagicProduct(id, name, price, expiryDate, points, isBonus);
+                let magProdObj = new MagicProduct();
 
                 if (magProdObj != undefined && magProdObj != null) {
                     for (let i = 0; i < magProdKeys.length; i++) {
@@ -384,9 +386,9 @@ function init(data) {
     };
 
     // Uncomment this function once you fully implement the game to be able to run it
-    // (function setGameCompleteFlag(){
-    //     gameComplete = true;
-    // })();
+    (function setGameCompleteFlag(){
+        gameComplete = true;
+    })();
 
     function main() {
         let products = loadMasterData();
